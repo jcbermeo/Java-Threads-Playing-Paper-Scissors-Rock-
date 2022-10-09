@@ -4,11 +4,14 @@ public class Player1 extends Thread{
 	private String name = "Juan";
 	private int objectNumber;
 	private String gameObject;
-	private int turn;
+	private boolean turn;
 	
 	
-	
-	
+	public Player1() {
+		super();
+		this.name = this.name;
+	}
+
 
 	public String getGameObject() {
 		return gameObject;
@@ -28,9 +31,21 @@ public class Player1 extends Thread{
 		return name;
 	}
 	
-
-
 	
+	public boolean getTurn() {
+		return turn;
+	}
+
+
+
+
+	public void setTurn(boolean turn) {
+		this.turn = turn;
+	}
+
+
+
+
 	///////////////////////////////////////////////////// Thread Methods /////////////////////////////////////////////////////
 	
 	@Override
@@ -38,7 +53,7 @@ public class Player1 extends Thread{
 		System.out.println(this.name + " is Awake!");
 		super.start();
 	}
-
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -50,7 +65,7 @@ public class Player1 extends Thread{
 		// TODO Auto-generated method stub
 		super.interrupt();
 	}
-
+	
 	@Override
 	public boolean isInterrupted() {
 		// TODO Auto-generated method stub
@@ -68,6 +83,6 @@ public class Player1 extends Thread{
 		// TODO Auto-generated method stub
 		return super.getId();
 	}
-
+	
 	
 }
