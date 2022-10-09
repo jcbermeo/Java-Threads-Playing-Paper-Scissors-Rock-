@@ -4,12 +4,14 @@ public class Player2 extends Thread{
 	private String name = "Anthony";
 	private int objectNumber;
 	private String gameObject;
-	private int turn;
+	private boolean turn;
 	
 	
+	public Player2() {
+		super();
+		this.name = this.name;
+	}
 	
-	
-
 	public String getGameObject() {
 		return gameObject;
 	}
@@ -28,6 +30,17 @@ public class Player2 extends Thread{
 		return name;
 	}
 	
+	public boolean getTurn() {
+		return turn;
+	}
+
+
+
+
+	public void setTurn(boolean turn) {
+		this.turn = turn;
+	}
+
 	
 	
 	///////////////////////////////////////////////////// Thread Methods /////////////////////////////////////////////////////
@@ -65,5 +78,6 @@ public class Player2 extends Thread{
 	public long getId() {
 		// TODO Auto-generated method stub
 		return super.getId();
-}
+	}
+	
 }
