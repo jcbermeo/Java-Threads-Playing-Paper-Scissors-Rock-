@@ -1,7 +1,7 @@
 
 public class Player2 extends Thread{
 	
-	private String name = "Anthony";
+	private String name;
 	private int objectNumber;
 	private String gameObject;
 	private boolean turn;
@@ -46,7 +46,7 @@ public class Player2 extends Thread{
 	///////////////////////////////////////////////////// Thread Methods /////////////////////////////////////////////////////
 	@Override
 	public synchronized void start() {
-		System.out.println(this.name + " is Awake!");
+		System.out.println(getName() + " is Ready! (Thread is Awake)");
 		super.start();
 	}
 
