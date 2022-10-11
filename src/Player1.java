@@ -1,7 +1,7 @@
 
 public class Player1 extends Thread{
 	
-	private String name = "Juan";
+	private String name;
 	private int objectNumber;
 	private String gameObject;
 	private boolean turn;
@@ -17,16 +17,9 @@ public class Player1 extends Thread{
 		return gameObject;
 	}
 
-
-
-
 	public void setGameObject(String gameObject) {
 		this.gameObject = gameObject;
 	}
-
-
-
-
 	public String getName(String name) {
 		return name;
 	}
@@ -36,21 +29,18 @@ public class Player1 extends Thread{
 		return turn;
 	}
 
-
-
-
 	public void setTurn(boolean turn) {
 		this.turn = turn;
 	}
 
-
+	
 
 
 	///////////////////////////////////////////////////// Thread Methods /////////////////////////////////////////////////////
 	
 	@Override
 	public synchronized void start() {
-		System.out.println(this.name + " is Awake!");
+		System.out.println(getName() + " is Ready! (Thread is Awake)");
 		super.start();
 	}
 	
