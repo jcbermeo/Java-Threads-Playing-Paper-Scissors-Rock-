@@ -9,9 +9,11 @@ public class Main {
 	
 	static Random dice = new Random();
 	static Scanner scanner = new Scanner(System.in);
-
+	static String playerName; 
+	static int countPlayer = 1; 
 	public static void main(String[] args) throws InterruptedException {
 		
+		System.out.println("Welcome to Scissors Paper Rock!\nby Juan C. Bermeo");
 		mainMenu(); 
 	
 	}
@@ -19,7 +21,7 @@ public class Main {
 	private static void mainMenu() throws InterruptedException {
 		System.out.println("\nPlease Input a Number and press enter");
 		int variable = 0; 
-		System.out.println("1) Watch two objects play\n2) Read the Rules\n3) About the Developer\n0) Exit Game");
+		System.out.println("1) Start Game\n2) About the Software\n3) Exit Game");
 		String option = scanner.next(); 
 
 		switch (option) {
@@ -27,12 +29,9 @@ public class Main {
 				startGame();
 				break; 
 			case "2":
-			// Display the Rules
-				break; 
-			case "3":
-			// Display your biography and social media
+				aboutSoftware();
 				break;
-			case "4":
+			case "3":
 			// exit game 
 				System.out.println("Thank you come again :)\nby. Juan C. Bermeo");
 				System.exit(0);
@@ -43,72 +42,96 @@ public class Main {
 			
 	}
 	private static void startGame() throws InterruptedException {
+		
+		countPlayer = 1;
 		Player1 player1 = new Player1();
 		Player2 player2 = new Player2();
 		
-		System.out.println("Game started!");
+		player1.setName(setPlayerName());
+		player2.setName(setPlayerName());
 		
 		player1.start();
 		player2.start();
 		
+		System.out.println("\n** GAME STARTED **");
+		
 		player1.setTurn(getRandomTurn());
 		
 		if(player1.getTurn() == true) {
-			//player2.interrupt();
-			System.out.println("Player 1 goes First");
-			player1.setGameObject(getRandomObject());
-			System.out.println("Player 1 got: " + player1.getGameObject());
-				player1.sleep(3* 1000);
-			player2.setGameObject(getRandomObject());
-			System.out.println("Player 2 got: " + player2.getGameObject());
+			System.out.println(player1.getName() + " goes First");
+			// Player 1
+			System.out.println("... " +player1.getName() + " is thinking*"); 
+				player1.sleep(getRandomTime() * 1000);
+				player1.setGameObject(getRandomObject());
+			System.out.println(player1.getName() + " chose: " + player1.getGameObject());
+			
+			// Player 2 
+			System.out.println("... " +player2.getName() + " is thinking*"); 
+				player2.sleep( getRandomTime() * 1000);
+				player2.setGameObject(getRandomObject());
+			System.out.println(player2.getName() + " chose: " + player2.getGameObject());
 		}
 		else {
-			System.out.println("Player 2 goes First");
-			//player1.interrupt();
-			player2.setGameObject(getRandomObject());
-			System.out.println("Player 2 got: " + player2.getGameObject());
-				player2.sleep(3* 1000);
-			player1.setGameObject(getRandomObject());
-			System.out.println("Player 1 got: " + player1.getGameObject());
+			System.out.println(player1.getName() + " goes First");
+			
+			// Player 2
+			System.out.println("... " +player2.getName() + " is thinking*"); 
+				player2.sleep(getRandomTime() * 1000);
+				player2.setGameObject(getRandomObject());
+			System.out.println(player2.getName() + " chose: " + player2.getGameObject());
+			
+			// Player 1
+			System.out.println("... " +player1.getName() + " is thinking*"); 
+				player1.sleep( getRandomTime()* 1000);
+				player1.setGameObject(getRandomObject());
+			System.out.println(player1.getName() + " chose: " + player1.getGameObject());
 			
 		}
 		
 		if(player1.getGameObject() != player2.getGameObject()) {
 			
 			if(player1.getGameObject() == "SCISSORS" && player2.getGameObject() == "PAPER") {
-				System.out.println("Player 1 Wins!");
+				System.out.println("** "+  player1.getName() + " Wins! **");
+				playAgainMenu();
 			}
 			if(player2.getGameObject() == "SCISSORS" && player1.getGameObject() == "PAPER") {
-				System.out.println("Player 2 Wins!");
+				System.out.println("** "+player2.getName() + " Wins!");
+				playAgainMenu();
 				
 			}
 			if(player1.getGameObject() == "ROCK" && player2.getGameObject() == "PAPER") {
-				System.out.println("Player 2 Wins!");
+				System.out.println("** "+player2.getName() + " Wins!");
+				playAgainMenu();
 			}
 			if(player2.getGameObject() == "ROCK" && player1.getGameObject() == "PAPER") {
-				System.out.println("Player 1 Wins!");
+				System.out.println("** "+  player1.getName() + " Wins! **");
+				playAgainMenu();
 	
 			}
 			if(player1.getGameObject() == "PAPER" && player2.getGameObject() == "SCISSORS") {
-				System.out.println("Player 2 Wins!");
-			
+				System.out.println("** "+player2.getName() + " Wins!");
+				playAgainMenu();
 			}
 			if(player2.getGameObject() == "PAPER" && player1.getGameObject() == "SCISSORS") {
-				System.out.println("Player 1 Wins!");
+				System.out.println("** "+  player1.getName() + " Wins! **");
+				playAgainMenu();
 		
 			}
 			if(player1.getGameObject() == "SCISSORS" && player2.getGameObject() == "ROCK") {
-				System.out.println("Player 2 wins!");
+				System.out.println("** "+player2.getName() + " Wins!");
+				playAgainMenu();
 		
 			}
 			if(player2.getGameObject() == "SCISSORS" && player1.getGameObject() == "ROCK") {
-				System.out.println("Player 1 wins!");
+				System.out.println("** "+  player1.getName() + " Wins! **");
+				playAgainMenu();
 			}
 		}
 		else {
-			System.out.println("=== DRAW ===");
+			System.out.println(" *** DRAW GAME *** ");
+			playAgainMenu();
+			
 		}
-		
 	}
 	
 	// How to ensure Mutual Exclusion?
@@ -123,6 +146,16 @@ public class Main {
 		number = 0+dice.nextInt(3);	// Dice between 1 to 3
 		
 		return options[number];
+	}
+	private static int getRandomTime() {
+		
+		// Random number between 0 and 10
+		
+		int number = 0;
+		
+		number = 0+dice.nextInt(10);	
+		
+		return number;
 	}
 	
 	private static boolean getRandomTurn() {
@@ -143,14 +176,39 @@ public class Main {
 		}
 		
 	}
-	private static void scissorFigure() {
-		System.out.println("SCISSORS");
+	
+	private static String setPlayerName() {
+		
+		System.out.println("Set player "+ countPlayer++ +" name: ");
+			playerName = scanner.next();
+		return playerName; 
+		
 	}
-	private static void paperFigure() {
-		System.out.println("PAPER");
-	}
-	private static void rockFigure() {
-		System.out.println("ROCK");
-	}
+	
+	private static void playAgainMenu() throws InterruptedException {
 
+		System.out.println("\nPlay Again?\n1) Yes\n2) Main Menu\n3) Exit");
+		String againOption = scanner.next();
+			switch (againOption) {
+				case "1":
+					startGame();
+					break; 
+				case "2":
+					mainMenu();
+					break; 
+				case "3":
+					System.out.println("Thank you come again :)\nby. Juan C. Bermeo");
+					System.exit(0);
+				break;
+			
+			default:
+				System.out.println(againOption + " not in the Options");
+		}
+	}
+	
+	private static void aboutSoftware() throws InterruptedException {	
+		System.out.println("Explanation goes here");
+		mainMenu();
+	}
+	
 }
